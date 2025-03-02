@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+#define pb push_back
+#define sz size()
+#define ll long long
+#define FOR(i, a, b) for(int i = a; i <= b; i++)
+#define FORD(i, a, b) for(int i = a; i >= b; i--)
+#define F(i, a, b) for(int i = a; i < b; ++i)
+#define FD(i, a, b) for(int i = a; i > b; --i)
+#define faster() ios_base::sync_with_stdio(0); cin.tie(NULL);cout.tie(NULL);
+#define vi vector<int>
+#define vll vector<ll>
+
+ll val[200005], sum[200005];
+vector<int> a[200005];
+
+void DFS(int u)
+{
+    for(int &i : a[u])
+    {
+        DFS(i);
+        sum[u] += sum[i] + 1; // so lan +1 cua dinh u
+        val[u] += val[i]; // gia tri cua dinh u
+    }
+    val[u] += sum[u];
+}
+
+int main()
+{
+    faster();
+    int t = 1;
+    //cin >> t;
+    int n, x;
+    while(t--)
+    {
+        cin >> n;
+        for(int i = 1; i <= n; ++i)
+        {
+            val[i] = 1;
+            sum[i] = 0;
+        }
+        for(int i = 2; i <= n; ++i)
+        {
+            cin >> x;
+            a[x].pb(i);
+        }
+        DFS(1);
+        for(int i = 1; i <= n; ++i)
+            cout << val[i] << ' ';
+    }
+    return 0;
+}
