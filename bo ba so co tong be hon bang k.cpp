@@ -15,7 +15,7 @@ int main(){
 			for(int j = i+1; j<n;  j++){
 				auto tmp = lower_bound(a+j+1,a+n,k-a[i]-a[j]) - a -j-1;
 //				cout << tmp <<" " << a[i] << " " << a[j] <<" " << a[tmp] <<endl; 
-				cnt += tmp;
+				if(tmp == k - a[i]-a[j]) cnt++; // bang k
 			}
 		}
 		cout << cnt << endl;
